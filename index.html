@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="ZabolotskiyAV">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="root">
+  <div class="page">
+
+    <header class="header">
+      <a href="#" class="header__logo-link"><img src="images/logo.svg" alt="Логотип MestoRussia" class="header__logo"></a>
+    </header>
+
+    <div class="profile">
+      <img src="images/profile-avatar.jpg" alt="Фото профиля" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <input type="button" title="Редактировать" class="profile__edit-button">
+        <p class="profile__description">Исследователь океана</p>
+      </div>
+      <input type="button" value="+" class="profile__add-button">
+    </div>
+
+    <section class="elements">
+      <div class="element">
+        <img src="images/aigir.jpg" alt="Айгир" class="element__image">
+        <h2 class="element__title">Айгир</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+      <div class="element">
+        <img src="images/atish.jpg" alt="Водопад Атыш" class="element__image">
+        <h2 class="element__title">Водопад Атыш</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+      <div class="element">
+        <img src="images/goluboe-ozero.jpg" alt="Голубое озеро" class="element__image">
+        <h2 class="element__title">Голубое озеро</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+      <div class="element">
+        <img src="images/iremel.jpg" alt="Иремель" class="element__image">
+        <h2 class="element__title">Иремель</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+      <div class="element">
+        <img src="images/krasniy-klych.jpg" alt="Красный ключ" class="element__image">
+        <h2 class="element__title">Красный ключ</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+      <div class="element">
+        <img src="images/shikhani.jpg" alt="Шиханы" class="element__image">
+        <h2 class="element__title">Шиханы</h2>
+        <input type="button" value="" class="element__like">
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__copyright">© 2021 Mesto Russia Republic of Bashkortostan</p>
+    </footer>
+  </div>
+  
+  <div class="popup">
+    <div class="popup__form">
+      <input type="button" value="Жак-Ив Кусто" class="">
+      <input type="button" value="Исследователь океана" class="">
+      <input type="button" value="Сохранить" class="">
+    </div>
+    <input type="button" value="+" class="popup__close-button">
+  </div>
+</body>
+</html>

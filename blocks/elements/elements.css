@@ -1,0 +1,20 @@
+.elements {
+  margin-top: 55px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 929px) {
+  .elements {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .elements {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 35px;
+  }
+}

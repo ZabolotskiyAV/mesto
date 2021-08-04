@@ -1,0 +1,10 @@
+.element {
+  display: flex;
+  flex-wrap: wrap;
+  width: 282px;
+  height: 362px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+}

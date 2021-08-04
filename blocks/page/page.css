@@ -1,0 +1,21 @@
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 45px 0 65px;
+}
+
+@media screen and (max-width: 929px) {
+  .page {
+    width: 100%;
+    padding: 40px 25px 55px;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    width: 100%;
+    padding: 25px 20px 35px;
+    box-sizing: border-box;
+  }
+}
