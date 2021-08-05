@@ -1,38 +1,50 @@
-let container = document.querySelector('.container');
-let songsContainer = container.querySelector('.songs-container');
+// Находим попап
+let popup = document.querySelector('.popup');
 
-let addButton = container.querySelector('.form__submit-btn_action_add');
-let resetButton = container.querySelector('.form__submit-btn_action_reset');
+// Находим кнопки
+let btnEdit = document.querySelector('.profile__edit-button');
+let btnClose = document.querySelector('.popup__close-button');
 
-function renderAdded() {
-  let songs = songsContainer.querySelectorAll('.song');
-  let noSongsElement = container.querySelector('.no-songs');
-  
-  if (songs.length === 0) {
-    resetButton.setAttribute('disabled', true);
-    resetButton.classList.add('form__submit-btn_disabled');
-    noSongsElement.classList.remove('no-songs_hidden');
-  }
-  else {
-    resetButton.removeAttribute('disabled', true);
-    resetButton.classList.remove('form__submit-btn_disabled');
-    noSongsElement.classList.add('no-songs_hidden');
-  }
+// Находим форму в DOM
+let formElement = document.querySelector('.popup__container');
+
+// Находим поля формы в DOM
+let nameInput = document.querySelector('.popup__name');
+let jobInput = document.querySelector('.popup__description');
+
+// Находим поля для формы в DOM
+let profileName = document.querySelector('.profile__name');
+let profileDescription = document.querySelector('.profile__description');
+
+// Обработчик открытия попапа
+function popupOpen() {
+  popup.classList.add('popup_opened');
+  // Задаем значения полям формы из полей
+  nameInput.value = profileName.textContent; 
+  jobInput.value = profileDescription.textContent;
 }
 
-function addSong() {
-  let artist = document.querySelector('.input__text_type_artist');
-  let song = document.querySelector('.input__text_type_song');
-  songsContainer.insertAdjacentHTML ('beforeend', `
-    <div class="song">
-      <h4 class="song__artist">${artist.value}</h4>
-      <p class="song__title">${song.value}</p>
-      <button class="song__like"></button>
-    </div>
-    `);
-  renderAdded();
+// Обработчик закрытия попапа без сохранения
+function popupClose() {
+  popup.classList.remove('popup_opened');
 }
 
-addButton.addEventListener('click', addSong);
+// Следим за событиями открытия и закрытия попапа
+btnEdit.addEventListener('click', popupOpen);
+btnClose.addEventListener('click', popupClose);
 
-renderAdded();
+
+// Обработчик «отправки» формы
+function formSubmitHandler (evt) {
+  evt.preventDefault(); // отменяем перезагрузку страницы после «отправки» формы
+
+  // Задаем значения полям формы из полей
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = jobInput.value;
+
+  popup.classList.remove('popup_opened');
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formElement.addEventListener('submit', formSubmitHandler);

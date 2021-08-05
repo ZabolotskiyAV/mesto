@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="Проект Место - фотографии удивительной природы России">
+  <meta name="keywords" content="проект Место, фотографии природы, природа России">
   <meta name="author" content="ZabolotskiyAV">
   <link rel="stylesheet" href="pages/index.css">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/png">
   <title>Mesto</title>
 </head>
 <body class="root">
@@ -20,42 +21,42 @@
       <img src="images/profile-avatar.jpg" alt="Фото профиля" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <input type="button" title="Редактировать" class="profile__edit-button">
+        <button type="button" value="" title="Редактировать" class="profile__edit-button"></button>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <input type="button" value="" class="profile__add-button">
+      <button type="button" value="" class="profile__add-button"></button>
     </div>
 
     <section class="elements">
       <div class="element">
         <img src="images/aigir.jpg" alt="Айгир" class="element__image">
         <h2 class="element__title">Айгир</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
       <div class="element">
         <img src="images/atish.jpg" alt="Водопад Атыш" class="element__image">
         <h2 class="element__title">Водопад Атыш</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
       <div class="element">
         <img src="images/goluboe-ozero.jpg" alt="Голубое озеро" class="element__image">
         <h2 class="element__title">Голубое озеро</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
       <div class="element">
         <img src="images/iremel.jpg" alt="Иремель" class="element__image">
         <h2 class="element__title">Иремель</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
       <div class="element">
         <img src="images/krasniy-klych.jpg" alt="Красный ключ" class="element__image">
         <h2 class="element__title">Красный ключ</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
       <div class="element">
         <img src="images/shikhani.jpg" alt="Шиханы" class="element__image">
         <h2 class="element__title">Шиханы</h2>
-        <input type="button" value="" class="element__like">
+        <button type="button" value="" class="element__like"></button>
       </div>
     </section>
 
@@ -65,13 +66,15 @@
   </div>
   
   <div class="popup">
-    <div class="popup__container">
-      <input type="button" value="" class="popup__close-button">
+    <form class="popup__container">
+      <button type="button" value="" class="popup__close-button"></button>
       <p class="popup__title">Редактировать профиль</p>
-      <input type="text" value="Жак-Ив Кусто" class="popup__name popup__input-text" placeholder="Имя">
-      <input type="text" value="Исследователь океана" class="popup__description popup__input-text" placeholder="Профессия">
-      <input type="button" value="Сохранить" class="popup__save-button">
-    </div>
+      <input type="text" value="" class="popup__name popup__input-text" placeholder="Имя">
+      <input type="text" value="" class="popup__description popup__input-text" placeholder="Профессия">
+      <input type="submit" value="Сохранить" class="popup__save-button">
+    </form>
   </div>
+
+  <script src="blocks/popup/popup.js"></script>
 </body>
 </html>
