@@ -11,5 +11,5 @@
 }
 
 .popup__input-text:focus-visible {
-  outline: 1px solid rgba(0, 0, 0, .3);
+  outline: 0;
 }
