@@ -9,8 +9,8 @@ let btnClose = document.querySelector('.popup__close-button');
 let formElement = document.querySelector('.popup__container');
 
 // Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__name');
-let jobInput = document.querySelector('.popup__description');
+let nameInput = document.getElementById('inputProfileName');
+let jobInput = document.getElementById('inputProfileDescription');
 
 // Находим поля для формы в DOM
 let profileName = document.querySelector('.profile__name');
