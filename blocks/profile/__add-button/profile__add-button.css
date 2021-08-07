@@ -5,7 +5,7 @@
   margin-left: auto;
   background-color: transparent;
   border: 1px solid #fff;
-  background-image: url(../../../images/btnAdd.png);
+  background-image: url(../../../images/btnAdd.svg);
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -20,5 +20,6 @@
   .profile__add-button {
     min-width: 282px;
     margin: 35px auto 0;
+    background-size: 16px 16px;
   }
 }

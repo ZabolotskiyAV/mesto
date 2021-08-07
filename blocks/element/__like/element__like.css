@@ -4,7 +4,7 @@
   margin-left: auto;
   margin-right: 20px;
   background: transparent;
-  background-image: url(../../../images/btnLike.png);
+  background-image: url(../../../images/btnLike.svg);
   background-position: center;
   background-repeat: no-repeat;
   border: 0;
@@ -17,6 +17,6 @@
 }
 
 .element__like:active {
-  background-image: url(../../../images/btnLikeActive.png);
+  background-image: url(../../../images/btnLikeActive.svg);
   opacity: 1;
 }
