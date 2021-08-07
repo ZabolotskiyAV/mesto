@@ -14,51 +14,54 @@
   <div class="page">
 
     <header class="header">
-      <a href="#" class="header__logo-link"><img src="images/logo.svg" alt="Логотип MestoRussia" class="header__logo"></a>
+      <a href="#" class="header__logo-link" title="Mesto Russia"><img src="images/logo.svg" alt="Логотип MestoRussia" class="header__logo"></a>
     </header>
 
-    <div class="profile">
-      <img src="images/profile-avatar.jpg" alt="Фото профиля" class="profile__avatar">
-      <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button type="button" value="" title="Редактировать" class="profile__edit-button"></button>
-        <p class="profile__description">Исследователь океана</p>
-      </div>
-      <button type="button" value="" class="profile__add-button"></button>
-    </div>
+    <main class="main">
+      <section class="profile">
+        <img src="images/profile-avatar.jpg" alt="Фото профиля" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button type="button" value="" title="Редактировать" class="profile__edit-button" aria-label="Редактировать"></button>
+          <p class="profile__description">Исследователь океана</p>
+        </div>
+        <button type="button" value=""  title="Добавить" class="profile__add-button" aria-label="Добавить"></button>
+      </section>
 
-    <section class="elements">
-      <div class="element">
-        <img src="images/aigir.jpg" alt="Айгир" class="element__image">
-        <h2 class="element__title">Айгир</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-      <div class="element">
-        <img src="images/atish.jpg" alt="Водопад Атыш" class="element__image">
-        <h2 class="element__title">Водопад Атыш</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-      <div class="element">
-        <img src="images/goluboe-ozero.jpg" alt="Голубое озеро" class="element__image">
-        <h2 class="element__title">Голубое озеро</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-      <div class="element">
-        <img src="images/iremel.jpg" alt="Иремель" class="element__image">
-        <h2 class="element__title">Иремель</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-      <div class="element">
-        <img src="images/krasniy-klych.jpg" alt="Красный ключ" class="element__image">
-        <h2 class="element__title">Красный ключ</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-      <div class="element">
-        <img src="images/shikhani.jpg" alt="Шиханы" class="element__image">
-        <h2 class="element__title">Шиханы</h2>
-        <button type="button" value="" class="element__like"></button>
-      </div>
-    </section>
+      <section class="elements">
+        <div class="element">
+          <img src="images/aigir.jpg" alt="Айгир" class="element__image">
+          <h2 class="element__title">Айгир</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+        <div class="element">
+          <img src="images/atish.jpg" alt="Водопад Атыш" class="element__image">
+          <h2 class="element__title">Водопад Атыш</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+        <div class="element">
+          <img src="images/goluboe-ozero.jpg" alt="Голубое озеро" class="element__image">
+          <h2 class="element__title">Голубое озеро</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+        <div class="element">
+          <img src="images/iremel.jpg" alt="Иремель" class="element__image">
+          <h2 class="element__title">Иремель</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+        <div class="element">
+          <img src="images/krasniy-klych.jpg" alt="Красный ключ" class="element__image">
+          <h2 class="element__title">Красный ключ</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+        <div class="element">
+          <img src="images/shikhani.jpg" alt="Шиханы" class="element__image">
+          <h2 class="element__title">Шиханы</h2>
+          <button type="button" value="" class="element__like" aria-label="Нравится"></button>
+        </div>
+      </section>
+
+    </main>
 
     <footer class="footer">
       <p class="footer__copyright">© 2021 Mesto Russia Republic of Bashkortostan</p>
@@ -67,11 +70,11 @@
   
   <div class="popup">
     <form class="popup__container">
-      <button type="button" value="" class="popup__close-button"></button>
+      <button type="button" value="" title="Закрыть" class="popup__close-button" aria-label="Закрыть"></button>
       <p class="popup__title">Редактировать профиль</p>
       <input type="text" value="" class="popup__name popup__input-text" placeholder="Имя">
       <input type="text" value="" class="popup__description popup__input-text" placeholder="Профессия">
-      <input type="submit" value="Сохранить" class="popup__save-button">
+      <button type="submit" value="Сохранить" class="popup__save-button">
     </form>
   </div>
 

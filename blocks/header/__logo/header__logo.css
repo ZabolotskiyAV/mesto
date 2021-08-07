@@ -1,4 +1,9 @@
 .header__logo {
   width: 100%;
   height: auto;
+  transition: all ease .5s;
+}
+
+.header__logo:hover {
+  opacity: .8;
 }
