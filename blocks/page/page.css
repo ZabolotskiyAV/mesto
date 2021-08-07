@@ -14,8 +14,12 @@
 
 @media screen and (max-width: 425px) {
   .page {
-    width: 100%;
     padding: 25px 20px 35px;
-    box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .page {
+    padding: 25px 10px 35px;
   }
 }
