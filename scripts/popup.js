@@ -17,7 +17,7 @@ let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
 
 // Обработчик открытия попапа
-function popupOpen() {
+function openPopup() {
   popup.classList.add('popup_opened');
   // Задаем значения полям формы из полей
   nameInput.value = profileName.textContent; 
@@ -25,14 +25,9 @@ function popupOpen() {
 }
 
 // Обработчик закрытия попапа без сохранения
-function popupClose() {
+function closePopup() {
   popup.classList.remove('popup_opened');
 }
-
-// Следим за событиями открытия и закрытия попапа
-btnEdit.addEventListener('click', popupOpen);
-btnClose.addEventListener('click', popupClose);
-
 
 // Обработчик «отправки» формы
 function formSubmitHandler (evt) {
@@ -42,8 +37,12 @@ function formSubmitHandler (evt) {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
 
-  popup.classList.remove('popup_opened');
+  closePopup();
 }
+
+// Следим за событиями открытия и закрытия попапа
+btnEdit.addEventListener('click', openPopup);
+btnClose.addEventListener('click', closePopup);
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
