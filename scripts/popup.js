@@ -1,49 +1,74 @@
-// Находим попап
-let popup = document.querySelector('.popup');
+// Находим попапы
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
 
 // Находим кнопки
-let btnEdit = document.querySelector('.profile__edit-button');
-let btnClose = document.querySelector('.popup__close-button');
+const btnEdit = document.querySelector('.profile__edit-button');
+const btnEditClose = document.querySelector('.popup__close-button');
+const btnAddClose = document.querySelector('.addcard__close-button');
+const btnAddCard = document.querySelector('.profile__add-button');
 
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__container');
+// Находим формы в DOM
+const formEdit = document.querySelector('.editProfile');
+const formAdd = document.querySelector('.addCard');
 
-// Находим поля формы в DOM
-let nameInput = document.getElementById('inputProfileName');
-let jobInput = document.getElementById('inputProfileDescription');
+// Находим поля форм в DOM
+const nameInput = document.getElementById('inputProfileName');
+const jobInput = document.getElementById('inputProfileDescription');
+const cardNameInput = document.getElementById('inputCardName');
+const linkImageInput = document.getElementById('inputLinkImage');
 
 // Находим поля для формы в DOM
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
 
-// Обработчик открытия попапа
-function openPopup() {
-  popup.classList.add('popup_opened');
+// Обработчики открытий попапов
+function openPopupEdit() {
+  popupEdit.classList.add('popup_opened');
   // Задаем значения полям формы из полей
   nameInput.value = profileName.textContent; 
   jobInput.value = profileDescription.textContent;
 }
-
-// Обработчик закрытия попапа без сохранения
-function closePopup() {
-  popup.classList.remove('popup_opened');
+function openPopupAdd() {
+  popupAdd.classList.add('popup_opened');
 }
 
-// Обработчик «отправки» формы
-function formSubmitHandler (evt) {
+// Обработчики закрытия попапов без сохранения
+function closePopupEdit() {
+  popupEdit.classList.remove('popup_opened');
+}
+function closePopupAdd() {
+  cardNameInput.value = ''; 
+  linkImageInput.value = '';
+  popupAdd.classList.remove('popup_opened');
+}
+
+// Обработчики «отправки» форм
+function formEditSubmitHandler (evt) {
   evt.preventDefault(); // отменяем перезагрузку страницы после «отправки» формы
 
   // Задаем значения полям формы из полей
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
 
-  closePopup();
+  closePopupEdit();
+}
+
+function formAddSubmitHandler (evt) {
+  evt.preventDefault(); // отменяем перезагрузку страницы после «отправки» формы
+
+  // Закрываем удалением класса, без вызова функции, чтобы не стереть данные
+
+  popupAdd.classList.remove('popup_opened');
 }
 
 // Следим за событиями открытия и закрытия попапа
-btnEdit.addEventListener('click', openPopup);
-btnClose.addEventListener('click', closePopup);
+btnEdit.addEventListener('click', openPopupEdit);
+btnEditClose.addEventListener('click', closePopupEdit);
+btnAddClose.addEventListener('click', closePopupAdd);
+btnAddCard.addEventListener('click', openPopupAdd);
 
-// Прикрепляем обработчик к форме:
+// Прикрепляем обработчики к формам:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+formEdit.addEventListener('submit', formEditSubmitHandler);
+formAdd.addEventListener('submit', formAddSubmitHandler);
