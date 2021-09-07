@@ -1,3 +1,4 @@
+// Первоначальный массив
 const initialCards = [
   {
     name: 'Айгир',
@@ -29,20 +30,20 @@ const template = document.getElementById('cards');
 
 const elements = document.querySelector('.elements');
 
-function initCards (card) {
+// Обработчик создания карточки из массива
+function initCards(card) {
   const newCard = template.content.firstElementChild.cloneNode(true);
   const cardImage = newCard.querySelector('.element__image');
   const cardTitle = newCard.querySelector('.element__title');
   cardImage.alt = card.name;
   cardImage.src = card.link;
   cardTitle.innerText = card.name;
-
-  elements.appendChild(newCard);
+  newCard.querySelector('.element__like').addEventListener('click', likeBtn); // слушатель лайка
+    elements.appendChild(newCard);
 }
 
+// Добавляем карточки из массива
 initialCards.forEach(initCards);
-
-
 
 // Находим попапы
 const popupEdit = document.querySelector('.popup-edit');
@@ -53,6 +54,13 @@ const btnEdit = document.querySelector('.profile__edit-button');
 const btnEditClose = document.querySelector('.popup__close-button');
 const btnAddCardClose = document.querySelector('.addcard__close-button');
 const btnAddCard = document.querySelector('.profile__add-button');
+const btnLikeCard = document.querySelectorAll('.element__like');
+
+// Обработчик лайка
+function likeBtn(evt) {
+  const elementLikeBtn = evt.target;
+  elementLikeBtn.classList.toggle('element__like_active');
+}
 
 // Находим формы в DOM
 const formEdit = document.querySelector('.editProfile');
@@ -92,32 +100,41 @@ function closePopupAdd() {
 
 // Обработчики «отправки» форм
 function formEditSubmitHandler (evt) {
-  evt.preventDefault(); // отменяем перезагрузку страницы после «отправки» формы
-
+  // Отменяем перезагрузку страницы после «отправки» формы
+  evt.preventDefault(); 
   // Задаем значения полям формы из полей
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-
+  // Закрываем попап
   closePopupEdit();
 }
 
 function formAddSubmitHandler (evt) {
-  evt.preventDefault(); // отменяем перезагрузку страницы после «отправки» формы
-  
-  // Добавляем карточку
-
-  // Закрываем удалением класса, без вызова функции, чтобы не стереть данные
-
-  popupAdd.classList.remove('popup_opened');
+  // Отменяем перезагрузку страницы после «отправки» формы
+  evt.preventDefault();
+  // Создаем карточку из шаблона с картинкой и названием от пользователя
+  const newCard = template.content.firstElementChild.cloneNode(true);
+  const cardImage = newCard.querySelector('.element__image');
+  const cardTitle = newCard.querySelector('.element__title');
+  cardImage.alt = cardNameInput.value;
+  cardImage.src = linkImageInput.value;
+  cardTitle.innerText = cardNameInput.value;
+  newCard.querySelector('.element__like').addEventListener('click', likeBtn); // слушатель лайка
+  // Добавляем карточку в начало
+  elements.prepend(newCard);
+  // Закрываем и не забываем стереть данные
+  closePopupAdd();
 }
 
 // Следим за событиями открытия и закрытия попапа
 btnEdit.addEventListener('click', openPopupEdit);
 btnEditClose.addEventListener('click', closePopupEdit);
-btnAddCardClose.addEventListener('click', closePopupAdd);
 btnAddCard.addEventListener('click', openPopupAdd);
+btnAddCardClose.addEventListener('click', closePopupAdd);
 
 // Прикрепляем обработчики к формам:
-// он будет следить за событием “submit” - «отправка»
+// он будет следить за событием submit - «отправка»
 formEdit.addEventListener('submit', formEditSubmitHandler);
 formAdd.addEventListener('submit', formAddSubmitHandler);
+
+// Обработчик лайка
