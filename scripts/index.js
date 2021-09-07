@@ -35,11 +35,14 @@ function initCards(card) {
   const newCard = template.content.firstElementChild.cloneNode(true);
   const cardImage = newCard.querySelector('.element__image');
   const cardTitle = newCard.querySelector('.element__title');
+  const cardLike = newCard.querySelector('.element__like');
+  const cardDelete = newCard.querySelector('.element__delete');
   cardImage.alt = card.name;
   cardImage.src = card.link;
   cardTitle.innerText = card.name;
-  newCard.querySelector('.element__like').addEventListener('click', likeBtn); // слушатель лайка
-    elements.appendChild(newCard);
+  cardLike.addEventListener('click', likeCard); // слушатель лайка
+  cardDelete.addEventListener('click', deleteCard); // слушатель корзины
+  elements.appendChild(newCard);
 }
 
 // Добавляем карточки из массива
@@ -54,13 +57,7 @@ const btnEdit = document.querySelector('.profile__edit-button');
 const btnEditClose = document.querySelector('.popup__close-button');
 const btnAddCardClose = document.querySelector('.addcard__close-button');
 const btnAddCard = document.querySelector('.profile__add-button');
-const btnLikeCard = document.querySelectorAll('.element__like');
-
-// Обработчик лайка
-function likeBtn(evt) {
-  const elementLikeBtn = evt.target;
-  elementLikeBtn.classList.toggle('element__like_active');
-}
+const btnDelete = document.querySelector('.element__delete');
 
 // Находим формы в DOM
 const formEdit = document.querySelector('.editProfile');
@@ -76,6 +73,17 @@ const linkImageInput = document.getElementById('inputLinkImage');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
+// Обработчик лайка
+function likeCard(evt) {
+  const elementLikeBtn = evt.target;
+  elementLikeBtn.classList.toggle('element__like_active');
+}
+
+// Обработчик удаления
+function deleteCard() {
+  const elementDelete = btnDelete.closest('.element');
+  elementDelete.remove;
+}
 
 // Обработчики открытий попапов
 function openPopupEdit() {
@@ -116,10 +124,13 @@ function formAddSubmitHandler (evt) {
   const newCard = template.content.firstElementChild.cloneNode(true);
   const cardImage = newCard.querySelector('.element__image');
   const cardTitle = newCard.querySelector('.element__title');
+  const cardLike = newCard.querySelector('.element__like');
+  const cardDelete = newCard.querySelector('.element__delete');
   cardImage.alt = cardNameInput.value;
   cardImage.src = linkImageInput.value;
   cardTitle.innerText = cardNameInput.value;
-  newCard.querySelector('.element__like').addEventListener('click', likeBtn); // слушатель лайка
+  cardLike.addEventListener('click', likeBtn); // слушатель лайка
+  cardDelete.addEventListener('click', deleteBtn); // слушатель корзины
   // Добавляем карточку в начало
   elements.prepend(newCard);
   // Закрываем и не забываем стереть данные
