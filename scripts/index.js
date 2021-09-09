@@ -57,10 +57,10 @@ const popupImg = document.querySelector('.popup_type_img');
 // Находим кнопки
 const btnEdit = document.querySelector('.profile__edit-button');
 const btnEditClose = document.querySelector('.popup__close-button');
-const btnAddCardClose = document.querySelector('.addcard__close-button');
+const btnAddCardClose = document.querySelector('.popup__close-button-addcard');
 const btnAddCard = document.querySelector('.profile__add-button');
 const btnDelete = document.querySelector('.element__delete');
-const btnImgClose = document.querySelector('.img__close-button');
+const btnImgClose = document.querySelector('.popup__close-button-img');
 
 // Находим формы в DOM
 const formEdit = document.querySelector('.editProfile');
