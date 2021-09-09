@@ -42,6 +42,7 @@ function initCards(card) {
   cardTitle.innerText = card.name;
   cardLike.addEventListener('click', likeCard); // слушатель лайка
   cardDelete.addEventListener('click', deleteCard); // слушатель корзины
+  cardImage.addEventListener('click', openImage); // слушатель картинки
   elements.appendChild(newCard);
 }
 
@@ -49,8 +50,9 @@ function initCards(card) {
 initialCards.forEach(initCards);
 
 // Находим попапы
-const popupEdit = document.querySelector('.popup-edit');
-const popupAdd = document.querySelector('.popup-add');
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupAdd = document.querySelector('.popup_type_add');
+const popupImg = document.querySelector('.popup_type_img');
 
 // Находим кнопки
 const btnEdit = document.querySelector('.profile__edit-button');
@@ -58,6 +60,7 @@ const btnEditClose = document.querySelector('.popup__close-button');
 const btnAddCardClose = document.querySelector('.addcard__close-button');
 const btnAddCard = document.querySelector('.profile__add-button');
 const btnDelete = document.querySelector('.element__delete');
+const btnImgClose = document.querySelector('.img__close-button');
 
 // Находим формы в DOM
 const formEdit = document.querySelector('.editProfile');
@@ -80,9 +83,22 @@ function likeCard(evt) {
 }
 
 // Обработчик удаления
-function deleteCard() {
-  const elementDelete = btnDelete.closest('.element');
-  elementDelete.remove;
+function deleteCard(evt) {
+  evt.target.closest('.element').remove();
+}
+
+// Обработчик увеличения изображений
+function openImage(evt) {
+  //const image = evt.target.srcElement.baseURI;
+  const image = evt.target;
+  document.querySelector('.popup__image').src = image.src;
+  document.querySelector('.popup__image').alt = image.alt;
+  document.querySelector('.popup__image-title').textContent = image.alt;
+  openPopupImg();
+}
+
+function openPopupImg() {  
+  popupImg.classList.add('popup_opened');
 }
 
 // Обработчики открытий попапов
@@ -104,6 +120,9 @@ function closePopupAdd() {
   cardNameInput.value = ''; 
   linkImageInput.value = '';
   popupAdd.classList.remove('popup_opened');
+}
+function closePopupImg() {
+  popupImg.classList.remove('popup_opened');
 }
 
 // Обработчики «отправки» форм
@@ -129,23 +148,26 @@ function formAddSubmitHandler (evt) {
   cardImage.alt = cardNameInput.value;
   cardImage.src = linkImageInput.value;
   cardTitle.innerText = cardNameInput.value;
-  cardLike.addEventListener('click', likeBtn); // слушатель лайка
-  cardDelete.addEventListener('click', deleteBtn); // слушатель корзины
+  cardLike.addEventListener('click', likeCard); // слушатель лайка
+  cardDelete.addEventListener('click', deleteCard); // слушатель корзины
+  cardImage.addEventListener('click', openImage); // слушатель картинки
   // Добавляем карточку в начало
   elements.prepend(newCard);
-  // Закрываем и не забываем стереть данные
+  // Закрываем и не забываем стереть данные из полей
   closePopupAdd();
 }
 
-// Следим за событиями открытия и закрытия попапа
+// Слушатель клика по картинкам
+document.querySelector('.element__image').addEventListener('click', openImage);
+
+// Следим за событиями открытия и закрытия попапов
 btnEdit.addEventListener('click', openPopupEdit);
 btnEditClose.addEventListener('click', closePopupEdit);
 btnAddCard.addEventListener('click', openPopupAdd);
 btnAddCardClose.addEventListener('click', closePopupAdd);
+btnImgClose.addEventListener('click', closePopupImg);
 
-// Прикрепляем обработчики к формам:
-// он будет следить за событием submit - «отправка»
+// Прикрепляем слушателей к формам:
+// они будут следить за событием submit - «отправка»
 formEdit.addEventListener('submit', formEditSubmitHandler);
 formAdd.addEventListener('submit', formAddSubmitHandler);
-
-// Обработчик лайка
