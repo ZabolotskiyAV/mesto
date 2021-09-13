@@ -49,7 +49,7 @@ const btnDelete = document.querySelector('.element__delete');
 
 // Находим формы в DOM
 const formEdit = document.querySelector('.editProfile');
-const formAdd = document.querySelector('.addCard');
+const formAdd = document.querySelector('.add-card');
 
 // Находим поля форм в DOM
 const nameInput = document.getElementById('inputProfileName');
@@ -144,13 +144,7 @@ function formEditSubmitHandler (evt) {
 function formAddSubmitHandler (evt) {
   evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы
   // Создаем карточку из шаблона с картинкой и названием от пользователя
-  const newCard = createCard();
-  newCard.name = cardNameInput.value;
-  newCard.alt = cardNameInput.value;
-  newCard.link = linkImageInput.value;
-  newCard.innerText = cardNameInput.value;
-  initCard(newCard);
-  // Закрываем и не забываем стереть данные из полей
+  initCard({name: cardNameInput.value, link: linkImageInput.value});
   closePopupAdd();
 }
 
