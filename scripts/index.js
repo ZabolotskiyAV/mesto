@@ -102,6 +102,12 @@ function deleteCard(evt) {
 // Обработчики открытия попапа
 function openPopup(popup) {  
   popup.classList.add('popup_opened');
+  // Закрываем все попапы при нажатии Escape
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  });
 }
 
 // Обработчик редактирования профиля
@@ -147,6 +153,7 @@ function formAddSubmitHandler (evt) {
   initCard({name: cardNameInput.value, link: linkImageInput.value});
   closePopupAdd();
 }
+
 
 // Следим за событиями открытия и закрытия попапов
 btnEdit.addEventListener('click', openPopupEdit);
