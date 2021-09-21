@@ -32,7 +32,6 @@ const template = document.getElementById('cards');
 // Находим список элементов
 const elements = document.querySelector('.elements');
 
-
 // Находим попапы
 const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -79,9 +78,8 @@ function createCard(name, link) {
 }
 
 // Добавляение карточки в DOM дерево 
-
 function initCard(card) {
-  const  newCard = createCard(card.name, card.link);
+  const newCard = createCard(card.name, card.link);
   elements.prepend(newCard);
 }
 
@@ -103,10 +101,16 @@ function deleteCard(evt) {
 function openPopup(popup) {  
   popup.classList.add('popup_opened');
   // Закрываем все попапы при нажатии Escape
-  document.addEventListener('keydown', function (evt) {
+  document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       closePopup(popup);
     }
+  });
+  // Закрываем попап при клике вне попапа
+  popup.addEventListener('click', (evt) => {
+   if (evt.target.classList.contains('popup_opened')) {
+    closePopup(popup);
+   };
   });
 }
 
@@ -139,7 +143,7 @@ function closePopupAdd() {
 
 // Обработчики «отправки» форм
 function formEditSubmitHandler (evt) {
-  evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы
+  //evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
   // Задаем значения полям формы из полей
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
@@ -148,12 +152,11 @@ function formEditSubmitHandler (evt) {
 }
 
 function formAddSubmitHandler (evt) {
-  evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы
+  //evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
   // Создаем карточку из шаблона с картинкой и названием от пользователя
   initCard({name: cardNameInput.value, link: linkImageInput.value});
   closePopupAdd();
 }
-
 
 // Следим за событиями открытия и закрытия попапов
 btnEdit.addEventListener('click', openPopupEdit);
@@ -161,6 +164,7 @@ btnEditClose.addEventListener('click', () => closePopup(popupEdit));
 btnAddCard.addEventListener('click', () => openPopup(popupAdd));
 btnAddCardClose.addEventListener('click', closePopupAdd);
 btnImgClose.addEventListener('click', () => closePopup(popupImg));
+
 
 // Прикрепляем слушателей к формам:
 // они будут следить за событием submit - «отправка»
