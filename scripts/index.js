@@ -1,31 +1,3 @@
-// Первоначальный массив
-const initialCards = [
-  {
-    name: 'Айгир',
-    link: 'images/aigir.jpg'
-  },
-  {
-    name: 'Водопад Атыш',
-    link: 'images/atish.jpg'
-  },
-  {
-    name: 'Голубое озеро',
-    link: 'images/goluboe-ozero.jpg'
-  },
-  {
-    name: 'Иремель',
-    link: 'images/iremel.jpg'
-  },
-  {
-    name: 'Красный ключ',
-    link: 'images/krasniy-klych.jpg'
-  },
-  {
-    name: 'Шиханы',
-    link: 'images/shikhani.jpg'
-  }
-];
-
 // Находим шаблон
 const template = document.getElementById('cards');
 
@@ -33,7 +5,6 @@ const template = document.getElementById('cards');
 const elements = document.querySelector('.elements');
 
 // Находим попапы
-const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupImg = document.querySelector('.popup_type_img');
@@ -69,50 +40,64 @@ function createCard(name, link) {
   const cardDelete = newCard.querySelector('.element__delete');
   cardImage.alt = name;
   cardImage.src = link;
-  cardTitle.innerText = name;
-  cardLike.addEventListener('click', likeCard); // слушатель лайка
-  cardDelete.addEventListener('click', deleteCard); // слушатель корзины
-  cardImage.addEventListener('click', openImage); // слушатель картинки
+  cardTitle.textContent = name;
+  cardLike.addEventListener('click', handleLikeCard); // слушатель лайка
+  cardDelete.addEventListener('click', handleDeleteCard); // слушатель корзины
+  cardImage.addEventListener('click', handleOpenImage); // слушатель картинки
 
   return newCard;
 }
 
 // Добавляение карточки в DOM дерево 
-function initCard(card) {
+function addCard(card) {
   const newCard = createCard(card.name, card.link);
   elements.prepend(newCard);
 }
 
 // Добавление карточек из массива
-initialCards.forEach(initCard);
+initialCards.forEach(addCard);
 
 // Обработчик лайка
-function likeCard(evt) {
+function handleLikeCard(evt) {
   const elementLikeBtn = evt.target;
   elementLikeBtn.classList.toggle('element__like_active');
 }
 
 // Обработчик удаления
-function deleteCard(evt) {
+function handleDeleteCard(evt) {
   evt.target.closest('.element').remove();
 }
+
+// Закрытие попапа при нажатии Escape
+const closeByEsc = (evt) => {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popup);
+  }
+};
 
 // Обработчики открытия попапа
 function openPopup(popup) {  
   popup.classList.add('popup_opened');
   // Закрываем все попапы при нажатии Escape
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
+  document.addEventListener('keydown', closeByEsc);
   // Закрываем попап при клике вне попапа
-  popup.addEventListener('click', (evt) => {
+  /*popup.addEventListener('click', (evt) => {
    if (evt.target.classList.contains('popup_opened')) {
     closePopup(popup);
    };
-  });
+  });*/
 }
+
+// Закрываем попап при клике вне попапа
+const popupList = document.querySelectorAll('.popup'); // Создаём список всех попапов
+popupList.forEach(popup => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+     closePopup(evt.target);
+    };
+   });
+});
 
 // Обработчик редактирования профиля
 function openPopupEdit() {
@@ -123,7 +108,7 @@ function openPopupEdit() {
 }
 
 // Обработчик увеличения изображений
-function openImage(evt) {
+function handleOpenImage(evt) {
   const image = evt.target;
   document.querySelector('.popup__image').src = image.src;
   document.querySelector('.popup__image').alt = image.alt;
@@ -134,15 +119,15 @@ function openImage(evt) {
 // Обработчики закрытия попапов без сохранения
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEsc);
 }
 function closePopupAdd() {
-  cardNameInput.value = ''; 
-  linkImageInput.value = '';
+  formAdd.reset();
   closePopup(popupAdd);
 }
 
 // Обработчики «отправки» форм
-function formEditSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
   //evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
   // Задаем значения полям формы из полей
   profileName.textContent = nameInput.value;
@@ -151,10 +136,11 @@ function formEditSubmitHandler (evt) {
   closePopup(popupEdit);
 }
 
-function formAddSubmitHandler (evt) {
+function handleCardFormSubmit (evt) {
   //evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
   // Создаем карточку из шаблона с картинкой и названием от пользователя
-  initCard({name: cardNameInput.value, link: linkImageInput.value});
+  addCard({name: cardNameInput.value, link: linkImageInput.value});
+  disableSubmitButton(formAdd.querySelector('.popup__button'), config.inactiveButtonClass);
   closePopupAdd();
 }
 
@@ -168,5 +154,5 @@ btnImgClose.addEventListener('click', () => closePopup(popupImg));
 
 // Прикрепляем слушателей к формам:
 // они будут следить за событием submit - «отправка»
-formEdit.addEventListener('submit', formEditSubmitHandler);
-formAdd.addEventListener('submit', formAddSubmitHandler);
+formEdit.addEventListener('submit', handleProfileFormSubmit);
+formAdd.addEventListener('submit', handleCardFormSubmit);
