@@ -30,15 +30,10 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-// Активируем/отключаем кнопку в зависимости от валидности полей
-const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiveButtonClass) => {
-  const buttonElement = formElement.querySelector(submitButtonSelector);
-
-  if (hasInvalidInput(inputList)) {
-    disableSubmitButton(buttonElement, inactiveButtonClass);
-  } else {
-    enableSubmitButton(buttonElement, inactiveButtonClass);
-  }
+const hasNotInputValues = (inputList) => {
+  return inputList.some((inputElement) => {
+    return inputElement.value.lenght === 0;
+  });
 }
 
 // Обработчик "выключения" кнопки отправки формы
@@ -51,6 +46,16 @@ const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
 const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.removeAttribute('disabled');
   buttonElement.classList.remove(inactiveButtonClass);
+}
+
+// Активируем/отключаем кнопку в зависимости от валидности полей
+const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiveButtonClass) => {
+  const buttonElement = formElement.querySelector(submitButtonSelector);
+  if (hasInvalidInput(inputList) || hasNotInputValues(inputList)) {
+    disableSubmitButton(buttonElement, inactiveButtonClass);
+  } else {
+    enableSubmitButton(buttonElement, inactiveButtonClass);
+  }
 }
 
 const setEvenetListeners = (formElement, inputSelector, submitButtonSelector, inputErrorClass, errorClass, inactiveButtonClass) => {
@@ -68,6 +73,10 @@ const setEvenetListeners = (formElement, inputSelector, submitButtonSelector, in
       toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
     });
   });
+
+  if (hasNotInputValues(inputList)) {
+    toggleButtonState(formElement, inputList, submitButtonSelector, inactiveButtonClass);
+  }
 };
 
 // Включаем валидацию
@@ -86,11 +95,14 @@ const enableValidation = (config) => {
 };
 
 // Объект обработчика из условия
-enableValidation({
+const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-});
+}
+
+// Обработчик с объектом из условия
+enableValidation(config);
