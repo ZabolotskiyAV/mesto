@@ -122,7 +122,7 @@ function closePopupAdd() {
 
 /** Обработчики «отправки» форм */
 function handleProfileFormSubmit (evt) {
-  // evt.preventDefault(); /** Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
+  // evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
   // Задаем значения полям формы из полей
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
@@ -130,7 +130,7 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupEdit);
 }
 function handleCardFormSubmit (evt) {
-  // evt.preventDefault(); /** Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации  
+  // evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации  
   addCard({name: cardNameInput.value, link: linkImageInput.value}); // Создаем карточку из шаблона с картинкой и названием от пользователя
   disableSubmitButton(formAdd.querySelector('.popup__button'), config.inactiveButtonClass);
   closePopupAdd();
