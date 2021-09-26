@@ -1,18 +1,18 @@
-// Показываем ошибку
+/** Показываем ошибку */
 const showInputError = (inputElement, errorElement, inputErrorClass, errorClass) => {
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = inputElement.validationMessage;
   errorElement.classList.add(errorClass);
 }
 
-// Скрываем ошибку
+/** Скрываем ошибку */
 const hideInputError = (inputElement, errorElement, inputErrorClass, errorClass) => {
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
 
-// Проверяем поля на валидность и показываем/убираем ошибку
+/** Проверяем поля на валидность и показываем/убираем ошибку */
 const checkInputValidity = (formElement, inputElement, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
@@ -23,7 +23,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
   }
 };
 
-// Проверяем все поля на валидность, если есть хоть одно - получаем true
+/** Проверяем все поля на валидность, если есть хоть одно - получаем true */
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -36,19 +36,19 @@ const hasNotInputValues = (inputList) => {
   });
 }
 
-// Обработчик "выключения" кнопки отправки формы
+/** Обработчик "выключения" кнопки отправки формы */
 const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.setAttribute('disabled', true);
   buttonElement.classList.add(inactiveButtonClass);
 }
 
-// Обработчик "включения" кнопки отправки формы
+/** Обработчик "включения" кнопки отправки формы */
 const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.removeAttribute('disabled');
   buttonElement.classList.remove(inactiveButtonClass);
 }
 
-// Активируем/отключаем кнопку в зависимости от валидности полей
+/** Активируем/отключаем кнопку в зависимости от валидности полей */
 const toggleButtonState = (formElement, inputList, submitButtonSelector, inactiveButtonClass) => {
   const buttonElement = formElement.querySelector(submitButtonSelector);
   if (hasInvalidInput(inputList) || hasNotInputValues(inputList)) {
@@ -79,7 +79,7 @@ const setEvenetListeners = (formElement, inputSelector, submitButtonSelector, in
   }
 };
 
-// Включаем валидацию
+/** Включаем валидацию */
 const enableValidation = (config) => {
   const formList = document.querySelectorAll(config.formSelector);
   formList.forEach(formElement => {
@@ -94,7 +94,7 @@ const enableValidation = (config) => {
   });
 };
 
-// Объект обработчика из условия
+/** Объект обработчика из условия */
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -104,5 +104,5 @@ const config = {
   errorClass: 'popup__error_visible'
 }
 
-// Обработчик с объектом из условия
+/** Обработчик с объектом из условия */
 enableValidation(config);
