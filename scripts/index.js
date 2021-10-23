@@ -1,3 +1,7 @@
+/** Импортируем модули */
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 /** Находим шаблон */
 const template = document.getElementById('cards');
 
@@ -31,7 +35,7 @@ const linkImageInput = document.getElementById('inputLinkImage');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 
-/** Создание карточки */
+/** Создание карточки 
 function createCard(name, link) {
   const newCard = template.content.firstElementChild.cloneNode(true);
   const cardImage = newCard.querySelector('.element__image');
@@ -46,16 +50,22 @@ function createCard(name, link) {
   cardImage.addEventListener('click', handleOpenImage); // слушатель картинки
 
   return newCard;
-}
+}*/
 
-/** Добавляение карточки в DOM дерево  */
+/** Добавляение карточки в DOM дерево 
 function addCard(card) {
   const newCard = createCard(card.name, card.link);
   elements.prepend(newCard);
-}
+}*/
 
-/** Добавление карточек из массива */
-initialCards.forEach(addCard);
+/** Добавление карточек из массива 
+initialCards.forEach(addCard);*/
+initialCards.forEach((item) => {
+  const card = new Card(item, '.element');
+  const cardElement = card.generateCard();
+
+  document.querySelector('.elements').append(cardElement);
+});
 
 /** Обработчик лайка */
 function handleLikeCard(evt) {
