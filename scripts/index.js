@@ -3,10 +3,10 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
 /** Находим шаблон */
-const template = document.getElementById('cards');
+//const template = document.getElementById('cards');
 
 /** Находим список элементов */
-const elements = document.querySelector('.elements');
+//const elements = document.querySelector('.elements');
 
 /** Находим попапы */
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -19,7 +19,7 @@ const btnEditClose = document.querySelector('.popup__close-button_edit');
 const btnImgClose = document.querySelector('.popup__close-button_img');
 const btnAddCardClose = document.querySelector('.popup__close-button_addcard');
 const btnAddCard = document.querySelector('.profile__add-button');
-const btnDelete = document.querySelector('.element__delete');
+//const btnDelete = document.querySelector('.element__delete');
 
 /** Находим формы в DOM */
 const formEdit = document.querySelector('.editProfile');
@@ -60,23 +60,31 @@ function addCard(card) {
 
 /** Добавление карточек из массива 
 initialCards.forEach(addCard);*/
+
+/** Создание карточки с помощью класса */
+function createCard(data) {
+  return new Card(data, '.element', handleOpenImage);
+}
+
+/** Добавление карточек из массива с помощью класса */
 initialCards.forEach((item) => {
-  const card = new Card(item, '.element');
+  /*const card = new Card(item, '.element');*/
+  const card = createCard(item);
   const cardElement = card.generateCard();
 
   document.querySelector('.elements').append(cardElement);
 });
 
-/** Обработчик лайка */
+/** Обработчик лайка карточки 
 function handleLikeCard(evt) {
   const elementLikeBtn = evt.target;
   elementLikeBtn.classList.toggle('element__like_active');
-}
+}*/
 
-/** Обработчик удаления */
+/** Обработчик удаления карточки
 function handleDeleteCard(evt) {
   evt.target.closest('.element').remove();
-}
+}*/
 
 /** Закрытие попапа при нажатии Escape */
 const closeByEsc = (evt) => {
@@ -111,12 +119,18 @@ function openPopupEdit() {
   jobInput.value = profileDescription.textContent;
 }
 
-/** Обработчик увеличения изображений */
+/** Обработчик увеличения изображений 
 function handleOpenImage(evt) {
   const image = evt.target;
   document.querySelector('.popup__image').src = image.src;
   document.querySelector('.popup__image').alt = image.alt;
   document.querySelector('.popup__image-title').textContent = image.alt;
+  openPopup(popupImg);
+}*/
+function handleOpenImage(name, link) {
+  document.querySelector('.popup__image').alt = name;
+  document.querySelector('.popup__image').src = link;
+  document.querySelector('.popup__image-title').textContent = name;
   openPopup(popupImg);
 }
 
@@ -140,8 +154,22 @@ function handleProfileFormSubmit (evt) {
   closePopup(popupEdit);
 }
 function handleCardFormSubmit (evt) {
-  // evt.preventDefault(); // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации  
-  addCard({name: cardNameInput.value, link: linkImageInput.value}); // Создаем карточку из шаблона с картинкой и названием от пользователя
+  // Отменяем перезагрузку страницы после «отправки» формы - добавлено в файле валидации
+  // evt.preventDefault();
+  
+  // Создаем карточку из шаблона с картинкой и названием от пользователя
+  //addCard({name: cardNameInput.value, link: linkImageInput.value});
+
+  // Создаём объект из полученных данных
+  const cardObj = {name: cardNameInput.value, link: linkImageInput.value};
+  
+  // Создаём и добавляем карточку
+  /* const card = new Card(cardObj, '.element'); */
+  const card = createCard(cardObj);
+  const cardElement = card.generateCard();
+
+  document.querySelector('.elements').prepend(cardElement);
+
   disableSubmitButton(formAdd.querySelector('.popup__button'), config.inactiveButtonClass);
   closePopupAdd();
 }
