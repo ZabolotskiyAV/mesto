@@ -1,4 +1,3 @@
-/** Создаем класс для дальнейшего экспорта */
 export default class Card {
   constructor(data, cardSelector, handleOpenImage) {
     this._name = data.name;
@@ -21,7 +20,7 @@ export default class Card {
     this._element.closest('.element').remove();
   }
     
-  /** Создаём карточку с принимаемыми данными */
+  /** Создаём карточку с данными */
   generateCard() {
     this._element = this._getTemplate();
 
