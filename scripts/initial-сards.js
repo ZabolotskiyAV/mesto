@@ -1,5 +1,5 @@
 /** Первоначальный массив */
-const initialCards = [
+export const initialCards = [
   {
     name: 'Айгир',
     link: 'images/aigir.jpg'
