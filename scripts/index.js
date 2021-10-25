@@ -1,10 +1,12 @@
+import { initialCards } from "./initial-сards.js";
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 
-/** Находим попапы */
+/** Находим попапы и элементы */
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAdd = document.querySelector('.popup_type_add');
 const popupImg = document.querySelector('.popup_type_img');
+const imgBigSize = document.querySelector('.popup__image');
 
 /** Находим кнопки */
 const btnEdit = document.querySelector('.profile__edit-button');
@@ -44,7 +46,8 @@ function createCard(data) {
 
 /** Обработчик создания и добавления карточки в DOM */
 function renderCard(card) {
-  const cardElement = card.generateCard();
+  const cardElement = card.generateCard(); // Изначально вызов был в функции 
+  // createCard, но после просмотра вебинара Q&A с наставником - перенёс
   document.querySelector('.elements').prepend(cardElement);
 }
 
@@ -72,7 +75,7 @@ function openPopup(popup) {
 /** Закрываем попап при клике вне попапа */
 const popupList = document.querySelectorAll('.popup'); // Создаём список всех попапов
 popupList.forEach(popup => {
-  popup.addEventListener('click', (evt) => {
+  popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup_opened')) {
      closePopup(evt.target);
     };
@@ -88,8 +91,8 @@ function openPopupEdit() {
 
 /** Обработчик увеличения изображений */
 function handleOpenImage(name, link) {
-  document.querySelector('.popup__image').alt = name;
-  document.querySelector('.popup__image').src = link;
+  imgBigSize.alt = name;
+  imgBigSize.src = link;
   document.querySelector('.popup__image-title').textContent = name;
   openPopup(popupImg);
 }
@@ -112,8 +115,7 @@ const addCardFormValidator = new FormValidator(config, formAdd);
 addCardFormValidator.enableValidation();
 
 /** Обработчик отправки формы редактирования профиля */
-function handleProfileFormSubmit (evt) {
-  //evt.preventDefault();
+function handleProfileFormSubmit () {
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
 
@@ -121,7 +123,7 @@ function handleProfileFormSubmit (evt) {
 }
 
 /** Обработчик отправки формы с новой карточкой */
-function handleCardFormSubmit (evt) {
+function handleCardFormSubmit() {
   // Сохраняем данные из формы в объект
   const cardObj = {name: cardNameInput.value, link: linkImageInput.value};  
   const card = createCard(cardObj);
@@ -130,6 +132,8 @@ function handleCardFormSubmit (evt) {
   const popupBtn = formAdd.querySelector('.popup__button');
   popupBtn.setAttribute('disabled', '');
   popupBtn.classList.add('popup__button_disabled');
+  // addCardFormValidator.toggleButtonState();
+  // Отключает кнопку только при добавлении каждой второй карточки, не смог починить
   closePopupAdd();
 }
 

@@ -17,7 +17,8 @@ export default class Card {
     this._element.querySelector('.element__like').classList.toggle('element__like_active');
   }
   _handleDeleteCard() {
-    this._element.closest('.element').remove();
+    this._element.remove();
+    this._element = null;
   }
     
   /** Создаём карточку с данными */
@@ -46,11 +47,4 @@ export default class Card {
     
     return this._element;
   }
-
-  /** Добавляем слушатели 
-  _setEventListeners() {
-    this._element.addEventListener('click', () => {
-      this._handleOpenImage(this._name, this._link);
-    });
-  }*/
 }
