@@ -47,11 +47,4 @@ export default class Card {
     
     return this._element;
   }
-
-  /** Добавляем слушатели 
-  _setEventListeners() {
-    this._element.addEventListener('click', () => {
-      this._handleOpenImage(this._name, this._link);
-    });
-  }*/
 }
